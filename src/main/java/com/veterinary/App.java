@@ -11,9 +11,9 @@ public class App {
   public static class RealApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-      FXMLLoader loader = new FXMLLoader(App.class.getResource("hello-view.fxml"));
+      FXMLLoader loader = new FXMLLoader(App.class.getResource("RegisterOwnerPage.fxml"));
       Scene scene = new Scene(loader.load());
-      stage.setTitle("Hello!");
+      stage.setTitle("Veterinaría!");
       stage.setScene(scene);
       stage.show();
     }
