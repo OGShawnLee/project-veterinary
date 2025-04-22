@@ -11,13 +11,13 @@ import java.util.List;
 
 public class OwnerDAO extends DAOPattern<OwnerDTO, String> {
   private final String CREATE_QUERY =
-    "INSERT INTO Owner (name, paternal_last_name, maternal_last_name, street, colony, number, email) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    "INSERT INTO Owner (email, name, paternal_last_name, maternal_last_name, colony, street, number) VALUES (?, ?, ?, ?, ?, ?, ?)";
   private final String GET_ALL_QUERY =
     "SELECT * FROM Owner";
   private final String GET_ONE_QUERY =
     "SELECT * FROM Owner WHERE id = ?";
   private final String UPDATE_QUERY =
-    "UPDATE Owner SET name = ?, paternal_last_name = ?, maternal_last_name = ?, street = ?, colony = ?, number = ? WHERE email = ?";
+    "UPDATE Owner SET name = ?, paternal_last_name = ?, maternal_last_name = ?, colony = ?, street = ?, number = ? WHERE email = ?";
   private final String DELETE_QUERY =
     "DELETE FROM Owner WHERE email = ?";
 
@@ -25,12 +25,12 @@ public class OwnerDAO extends DAOPattern<OwnerDTO, String> {
   protected OwnerDTO createDTOInstanceFromResultSet(ResultSet resultSet) throws SQLException {
     return new OwnerDTO.OwnerBuilder()
       .setEmail(resultSet.getString("email"))
-      .setID(resultSet.getString("id"))
       .setName(resultSet.getString("name"))
       .setPaternalLastName(resultSet.getString("paternal_last_name"))
       .setMaternalLastName(resultSet.getString("maternal_last_name"))
-      .setStreet(resultSet.getString("street"))
       .setColony(resultSet.getString("colony"))
+      .setStreet(resultSet.getString("street"))
+      .setNumber(resultSet.getInt("number"))
       .build();
   }
 
@@ -40,13 +40,13 @@ public class OwnerDAO extends DAOPattern<OwnerDTO, String> {
       Connection connection = getConnection();
       PreparedStatement statement = connection.prepareStatement(CREATE_QUERY)
     ) {
-      statement.setString(1, dataObject.getName());
-      statement.setString(2, dataObject.getPaternalLastName());
-      statement.setString(3, dataObject.getMaternalLastName());
-      statement.setString(4, dataObject.getStreet());
+      statement.setString(1, dataObject.getEmail());
+      statement.setString(2, dataObject.getName());
+      statement.setString(3, dataObject.getPaternalLastName());
+      statement.setString(4, dataObject.getMaternalLastName());
       statement.setString(5, dataObject.getColony());
-      statement.setInt(6, dataObject.getNumber());
-      statement.setString(7, dataObject.getEmail());
+      statement.setString(6, dataObject.getStreet());
+      statement.setInt(7, dataObject.getNumber());
       statement.executeUpdate();
     }
   }
@@ -92,13 +92,13 @@ public class OwnerDAO extends DAOPattern<OwnerDTO, String> {
   public void updateOne(OwnerDTO dataObject) throws SQLException {
     try (
       Connection connection = getConnection();
-      PreparedStatement statement = connection.prepareStatement(CREATE_QUERY)
+      PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)
     ) {
       statement.setString(1, dataObject.getName());
       statement.setString(2, dataObject.getPaternalLastName());
       statement.setString(3, dataObject.getMaternalLastName());
-      statement.setString(4, dataObject.getStreet());
-      statement.setString(5, dataObject.getColony());
+      statement.setString(4, dataObject.getColony());
+      statement.setString(5, dataObject.getStreet());
       statement.setInt(6, dataObject.getNumber());
       statement.setString(7, dataObject.getEmail());
       statement.executeUpdate();
