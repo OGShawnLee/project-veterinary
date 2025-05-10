@@ -1,7 +1,7 @@
 package com.veterinary.gui.controller;
 
 import com.veterinary.business.dto.OwnerDTO;
-import com.veterinary.db.dao.OwnerDAO;
+import com.veterinary.business.dao.OwnerDAO;
 import com.veterinary.gui.Modal;
 
 import javafx.fxml.FXML;

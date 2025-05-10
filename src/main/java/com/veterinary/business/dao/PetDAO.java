@@ -1,7 +1,8 @@
-package com.veterinary.db.dao;
+package com.veterinary.business.dao;
 
 import com.veterinary.business.dto.PetDTO;
-import com.veterinary.db.dao.filter.PetFilter;
+import com.veterinary.business.dao.filter.PetFilter;
+import com.veterinary.db.DBConnector;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,7 +42,7 @@ public class PetDAO extends DAOPattern<PetDTO, PetFilter> {
   @Override
   public void createOne(PetDTO dataObject) throws SQLException {
     try (
-      Connection connection = getConnection();
+      Connection connection = DBConnector.getConnection();
       PreparedStatement statement = connection.prepareStatement(CREATE_QUERY)
     ) {
       statement.setString(1, dataObject.getIDOwner());
@@ -59,7 +60,7 @@ public class PetDAO extends DAOPattern<PetDTO, PetFilter> {
   @Override
   public List<PetDTO> getAll() throws SQLException {
     try (
-      Connection connection = getConnection();
+      Connection connection = DBConnector.getConnection();
       PreparedStatement statement = connection.prepareStatement(GET_ALL_QUERY);
       ResultSet resultSet = statement.executeQuery()
     ) {
@@ -76,7 +77,7 @@ public class PetDAO extends DAOPattern<PetDTO, PetFilter> {
   @Override
   public PetDTO getOne(PetFilter filter) throws SQLException {
     try (
-      Connection connection = getConnection();
+      Connection connection = DBConnector.getConnection();
       PreparedStatement statement = connection.prepareStatement(GET_ONE_QUERY)
     ) {
       statement.setInt(1, filter.getID());
@@ -94,7 +95,7 @@ public class PetDAO extends DAOPattern<PetDTO, PetFilter> {
   @Override
   public void updateOne(PetDTO dataObject) throws SQLException {
     try (
-      Connection connection = getConnection();
+      Connection connection = DBConnector.getConnection();
       PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)
     ) {
       statement.setString(1, dataObject.getName());
@@ -113,7 +114,7 @@ public class PetDAO extends DAOPattern<PetDTO, PetFilter> {
   @Override
   public void deleteOne(PetFilter filter) throws SQLException {
     try (
-      Connection connection = getConnection();
+      Connection connection = DBConnector.getConnection();
       PreparedStatement statement = connection.prepareStatement(DELETE_QUERY)
     ) {
       statement.setInt(1, filter.getID());

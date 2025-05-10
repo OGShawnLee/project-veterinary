@@ -1,7 +1,7 @@
 package com.veterinary.gui.controller;
 
 import com.veterinary.business.dto.PetDTO;
-import com.veterinary.db.dao.PetDAO;
+import com.veterinary.business.dao.PetDAO;
 import com.veterinary.gui.Modal;
 
 import javafx.fxml.FXML;

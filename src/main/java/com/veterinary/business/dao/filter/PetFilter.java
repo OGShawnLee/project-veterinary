@@ -1,4 +1,4 @@
-package com.veterinary.db.dao.filter;
+package com.veterinary.business.dao.filter;
 
 public class PetFilter {
   private int id;
