@@ -1,5 +1,8 @@
 package com.veterinary.gui.controller;
 
+import com.veterinary.gui.controller.register.RegisterOwnerController;
+import com.veterinary.gui.controller.register.RegisterPetController;
+import com.veterinary.gui.controller.register.RegisterProductController;
 import javafx.stage.Stage;
 
 public class LandingPageController extends Controller {

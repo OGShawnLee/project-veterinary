@@ -1,8 +1,9 @@
-package com.veterinary.gui.controller;
+package com.veterinary.gui.controller.register;
 
 import com.veterinary.business.dao.ProductDAO;
 import com.veterinary.business.dto.ProductDTO;
 import com.veterinary.gui.Modal;
+import com.veterinary.gui.controller.Controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
