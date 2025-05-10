@@ -47,6 +47,32 @@ public class Validator {
     throw new IllegalArgumentException("Rol académico debe ser uno de los siguientes: Evaluador, Evaluador-Profesor, Profesor.");
   }
 
+  public static String getValidProductSpecies(String value) {
+    String finalValue = getValidString(value, "Especie");
+
+    if (
+        finalValue.equals("Dog") ||
+        finalValue.equals("Cat") ||
+        finalValue.equals("Both")
+    ) {
+      return finalValue;
+    }
+
+    if (finalValue.equals("Perro")) {
+      return "Dog";
+    }
+
+    if (finalValue.equals("Gato")) {
+      return "Cat";
+    }
+
+    if (finalValue.equals("Ambos")) {
+      return "Both";
+    }
+
+    throw new IllegalArgumentException("Rol académico debe ser uno de los siguientes: Evaluador, Evaluador-Profesor, Profesor.");
+  }
+
   public static String getValidEmail(String value) throws IllegalArgumentException {
     if (isValidEmail(value)) {
       return value.trim();
@@ -61,6 +87,32 @@ public class Validator {
     }
 
     throw new IllegalArgumentException(name + " no puede ser nulo o vacío.");
+  }
+
+  public static String getValidKind(String value) {
+    String finalValue = getValidString(value, "Tipo");
+
+    if (
+        finalValue.equals("Accessory") ||
+        finalValue.equals("Food") ||
+        finalValue.equals("Medicine")
+    ) {
+      return finalValue;
+    }
+
+    if (finalValue.equals("Accesorio")) {
+      return "Accessory";
+    }
+
+    if (finalValue.equals("Comida")) {
+      return "Food";
+    }
+
+    if (finalValue.equals("Medicamento")) {
+      return "Medicine";
+    }
+
+    throw new IllegalArgumentException("Rol académico debe ser uno de los siguientes: Evaluador, Evaluador-Profesor, Profesor.");
   }
 
   public static int getValidPositiveInteger(String value) throws IllegalArgumentException {
@@ -87,6 +139,14 @@ public class Validator {
 
   private static String getValidString(String value, String name) throws IllegalArgumentException {
     if (isValidString(value, 3, 128)) {
+      return value.trim();
+    }
+
+    throw new IllegalArgumentException(name + " no puede ser nulo o vacío.");
+  }
+
+  public static String getValidText(String value, String name) throws IllegalArgumentException {
+    if (isValidString(value, 3, 512)) {
       return value.trim();
     }
 

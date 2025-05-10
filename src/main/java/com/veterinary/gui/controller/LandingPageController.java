@@ -11,6 +11,10 @@ public class LandingPageController extends Controller {
     RegisterPetController.navigateToRegisterPetPage(getScene());
   }
 
+  public void navigateToRegisterProductPage() {
+    RegisterProductController.navigateToRegisterProductPage(getScene());
+  }
+
   public static void navigateToLandingPage(Stage currentStage) {
     navigateTo(currentStage,"Página de Inicio","LandingPage");
   }
