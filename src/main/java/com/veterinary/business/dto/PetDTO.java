@@ -1,5 +1,7 @@
 package com.veterinary.business.dto;
 
+import com.veterinary.business.Validator;
+
 import java.time.LocalDateTime;
 
 public class PetDTO {
@@ -77,28 +79,28 @@ public class PetDTO {
       return this;
     }
 
-    public PetBuilder setIDOwner(String idOwner) {
-      this.idOwner = idOwner;
+    public PetBuilder setIDOwner(String idOwner) throws IllegalArgumentException {
+      this.idOwner = Validator.getValidEmail(idOwner);
       return this;
     }
 
-    public PetBuilder setName(String name) {
-      this.name = name;
+    public PetBuilder setName(String name) throws IllegalArgumentException {
+      this.name = Validator.getValidName(name, "Nombre", 3, 32);
       return this;
     }
 
-    public PetBuilder setSpecies(String species) {
-      this.species = species;
+    public PetBuilder setSpecies(String species) throws IllegalArgumentException {
+      this.species = Validator.getValidPetSpecies(species);
       return this;
     }
 
-    public PetBuilder setBreed(String breed) {
-      this.breed = breed;
+    public PetBuilder setBreed(String breed) throws IllegalArgumentException {
+      this.breed = Validator.getValidName(breed, "Raza", 3, 32);
       return this;
     }
 
-    public PetBuilder setColour(String colour) {
-      this.colour = colour;
+    public PetBuilder setColour(String colour) throws IllegalArgumentException {
+      this.colour = Validator.getValidName(colour, "Color", 3, 32);
       return this;
     }
 

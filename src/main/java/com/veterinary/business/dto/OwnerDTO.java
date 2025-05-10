@@ -1,5 +1,7 @@
 package com.veterinary.business.dto;
 
+import com.veterinary.business.Validator;
+
 public class OwnerDTO extends Person {
   private final String email;
 
@@ -16,7 +18,7 @@ public class OwnerDTO extends Person {
     private String email;
 
     public OwnerBuilder setEmail(String email) {
-      this.email = email;
+      this.email = Validator.getValidEmail(email);
       return this;
     }
 

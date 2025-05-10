@@ -1,5 +1,7 @@
 package com.veterinary.business.dto;
 
+import com.veterinary.business.Validator;
+
 public abstract class Person {
   private final String name;
   private final String paternalLastName;
@@ -53,33 +55,43 @@ public abstract class Person {
       return (T) this;
     }
 
-    public T setName(String name) {
-      this.name = name;
+    public T setName(String name) throws IllegalArgumentException {
+      this.name = Validator.getValidName(name, "Nombre", 3, 32);
       return self();
     }
 
-    public T setPaternalLastName(String paternalLastName) {
-      this.paternalLastName = paternalLastName;
+    public T setPaternalLastName(String paternalLastName) throws IllegalArgumentException {
+      this.paternalLastName = Validator.getValidName(
+        paternalLastName,
+        "Apellido Paterno",
+        3,
+        32
+      );
       return self();
     }
 
-    public T setMaternalLastName(String maternalLastName) {
-      this.maternalLastName = maternalLastName;
+    public T setMaternalLastName(String maternalLastName) throws IllegalArgumentException {
+      this.maternalLastName = Validator.getValidName(
+        maternalLastName,
+        "Apellido Materno",
+        3,
+        32
+      );
       return self();
     }
 
-    public T setStreet(String street) {
-      this.street = street;
+    public T setStreet(String street) throws IllegalArgumentException {
+      this.street = Validator.getValidFlexibleName(street, "Calle", 3, 32);
       return self();
     }
 
-    public T setColony(String colony) {
-      this.colony = colony;
+    public T setColony(String colony) throws IllegalArgumentException {
+      this.colony = Validator.getValidFlexibleName(colony, "Colonia", 3, 32);
       return self();
     }
 
-    public T setNumber(int number) {
-      this.number = number;
+    public T setNumber(int number) throws IllegalArgumentException {
+      this.number = Validator.getValidPositiveInteger(String.valueOf(number));
       return self();
     }
 
