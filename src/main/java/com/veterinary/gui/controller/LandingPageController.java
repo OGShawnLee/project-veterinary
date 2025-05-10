@@ -18,6 +18,10 @@ public class LandingPageController extends Controller {
     RegisterProductController.navigateToRegisterProductPage(getScene());
   }
 
+  public void navigateToBuyProductPage() {
+    BuyProductController.navigateToBuyProductPage(getScene());
+  }
+
   public static void navigateToLandingPage(Stage currentStage) {
     navigateTo(currentStage,"Página de Inicio","LandingPage");
   }

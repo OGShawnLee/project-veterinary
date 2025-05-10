@@ -16,7 +16,7 @@ public class OwnerDAO extends DAOPattern<OwnerDTO, String> {
   private final String GET_ALL_QUERY =
     "SELECT * FROM Owner";
   private final String GET_ONE_QUERY =
-    "SELECT * FROM Owner WHERE id = ?";
+    "SELECT * FROM Owner WHERE email = ?";
   private final String UPDATE_QUERY =
     "UPDATE Owner SET name = ?, paternal_last_name = ?, maternal_last_name = ?, colony = ?, street = ?, number = ? WHERE email = ?";
   private final String DELETE_QUERY =

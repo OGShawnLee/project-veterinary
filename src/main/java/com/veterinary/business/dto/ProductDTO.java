@@ -65,7 +65,7 @@ public class ProductDTO {
     private float price;
     private String brand;
 
-    public ProductBuilder setId(int id) {
+    public ProductBuilder setID(int id) {
       this.id = id;
       return this;
     }

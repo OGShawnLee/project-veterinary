@@ -1,7 +1,5 @@
 DROP DATABASE Veterinary;
-
 CREATE DATABASE Veterinary;
-
 USE Veterinary;
 
 /* Creación de la Estructura de la Base de Datos */
@@ -107,7 +105,7 @@ CREATE TABLE Sale (
   id_sale INT AUTO_INCREMENT PRIMARY KEY,
   id_product INT NOT NULL,
   id_owner VARCHAR(128) NOT NULL,
-  bought_at DATETIME NOT NULL,
+  bought_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   quantity INT NOT NULL,
   FOREIGN KEY (id_product) REFERENCES Product(id_product) ON DELETE CASCADE,
   FOREIGN KEY (id_owner) REFERENCES Owner(email) ON DELETE CASCADE
