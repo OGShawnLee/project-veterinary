@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,11 +11,11 @@
 
 <AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="640.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.veterinary.gui.controller.RegisterOwnerController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.veterinary.gui.controller.RegisterPetController">
   <children>
-    <VBox layoutX="302.0" layoutY="55.0" prefHeight="356.0" prefWidth="356.0" spacing="16.0">
+    <VBox layoutX="302.0" layoutY="22.0" prefHeight="356.0" prefWidth="356.0" spacing="16.0">
       <children>
-        <Label alignment="CENTER" styleClass="heading h1" text="Registrar Dueño">
+        <Label alignment="CENTER" styleClass="heading h1" text="Registrar Mascota">
           <font>
             <Font name="System Bold" size="18.0"/>
           </font>
@@ -27,51 +28,53 @@
         </VBox>
         <VBox prefHeight="25.0" prefWidth="356.0" spacing="8.0">
           <children>
-            <Label text="Correo Electrónico"/>
-            <TextField fx:id="fieldEmail" prefHeight="25.0" prefWidth="356.0"
-                       promptText="Introduzca un correo electrónico"/>
+            <Label text="Correo Electrónico del Dueño"/>
+            <TextField fx:id="fieldOwnerEmail" prefHeight="25.0" prefWidth="356.0"
+                       promptText="Introduzca el correo electrónico del dueño"/>
           </children>
         </VBox>
         <VBox prefHeight="25.0" prefWidth="356.0" spacing="8.0">
           <children>
-            <Label text="Apellido Paterno"/>
-            <TextField fx:id="fieldPaternalLastName" prefHeight="25.0" prefWidth="356.0"
-                       promptText="Introduzca el apellido paterno"/>
+            <Label text="Especie"/>
+            <TextField fx:id="fieldSpecies" prefHeight="25.0" prefWidth="356.0" promptText="Introduzca la especie"/>
           </children>
         </VBox>
         <VBox prefHeight="25.0" prefWidth="356.0" spacing="8.0">
           <children>
-            <Label text="Apellido Materno"/>
-            <TextField fx:id="fieldMaternalLastName" prefHeight="25.0" prefWidth="356.0"
-                       promptText="Introduzca el apellido materno"/>
+            <Label text="Raza"/>
+            <TextField fx:id="fieldBreed" prefHeight="25.0" prefWidth="356.0" promptText="Introduzca la raza"/>
           </children>
         </VBox>
         <VBox prefHeight="25.0" prefWidth="356.0" spacing="8.0">
           <children>
-            <Label text="Colonia"/>
-            <TextField fx:id="fieldColony" prefHeight="25.0" prefWidth="356.0"
-                       promptText="Introduzca la colonia donde se ubica"/>
+            <Label text="Color"/>
+            <TextField fx:id="fieldColour" prefHeight="25.0" prefWidth="356.0" promptText="Introduzca el color"/>
           </children>
         </VBox>
         <VBox prefHeight="25.0" prefWidth="356.0" spacing="8.0">
           <children>
-            <Label text="Calle"/>
-            <TextField fx:id="fieldStreet" prefHeight="25.0" prefWidth="356.0"
-                       promptText="Introduzca la calle donde se ubica"/>
+            <Label text="Peso"/>
+            <TextField fx:id="fieldWeight" prefHeight="25.0" prefWidth="356.0" promptText="Introduzca el peso"/>
           </children>
         </VBox>
         <VBox prefHeight="25.0" prefWidth="356.0" spacing="8.0">
           <children>
-            <Label text="Número"/>
-            <TextField fx:id="fieldNumber" prefHeight="25.0" prefWidth="356.0"
-                       promptText="Introduzca el número donde se ubica"/>
+            <Label text="Altura"/>
+            <TextField fx:id="fieldHeight" prefHeight="25.0" prefWidth="356.0" promptText="Introduzca la altura"/>
           </children>
         </VBox>
-        <HBox prefHeight="25.0" prefWidth="356.0" spacing="16">
+        <VBox prefHeight="25.0" prefWidth="356.0" spacing="8.0">
+          <children>
+            <Label text="Fecha de Nacimiento"/>
+            <DatePicker fx:id="fieldBirthDate" prefHeight="25.0" prefWidth="356.0"
+                        promptText="Seleccione la fecha de nacmiento"/>
+          </children>
+        </VBox>
+        <HBox prefHeight="25.0" prefWidth="356.0" spacing="16.0">
           <Button mnemonicParsing="false" onAction="#navigateToLandingPage" prefHeight="40.0" prefWidth="356.0"
                   text="Volver a Inicio"/>
-          <Button mnemonicParsing="false" onAction="#handleRegisterOwner" prefHeight="40.0" prefWidth="356.0"
-                  text="Registrar Dueño"/>
+          <Button mnemonicParsing="false" onAction="#handleRegisterPet" prefHeight="40.0" prefWidth="356.0"
+                  text="Registrar Mascota"/>
         </HBox>
       </children>
     </VBox>

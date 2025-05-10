@@ -9,13 +9,22 @@ import java.io.IOException;
 
 public class App {
   public static class RealApp extends Application {
+    public RealApp() {
+      System.out.println("MAIN: Creating Application...");
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
-      FXMLLoader loader = new FXMLLoader(App.class.getResource("RegisterPet.fxml"));
+      FXMLLoader loader = new FXMLLoader(App.class.getResource("LandingPage.fxml"));
       Scene scene = new Scene(loader.load());
       stage.setTitle("Veterinaría!");
       stage.setScene(scene);
       stage.show();
+    }
+
+    @Override
+    public void init() {
+      System.out.println("INIT: Initializing Application...");
     }
   }
 

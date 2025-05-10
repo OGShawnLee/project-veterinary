@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="560.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.veterinary.gui.controller.LandingPageController">
+  <children>
+    <HBox layoutX="365.0" layoutY="264.0" prefHeight="32.0" spacing="16.0">
+      <children>
+        <Button mnemonicParsing="false" onMouseClicked="#navigateToRegisterOwnerPage" prefHeight="32.0"
+                text="Registrar Dueño"/>
+        <Button mnemonicParsing="false" onMouseClicked="#navigateToRegisterPetPage" prefHeight="32.0"
+                text="Registrar Mascota"/>
+      </children>
+    </HBox>
+  </children>
+</AnchorPane>

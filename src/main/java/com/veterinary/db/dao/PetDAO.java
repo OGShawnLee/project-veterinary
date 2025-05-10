@@ -9,23 +9,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Timestamp;
 
 public class PetDAO extends DAOPattern<PetDTO, PetFilter> {
   private final String CREATE_QUERY =
-    "INSERT INTO Pet (id_owner, name, species, breed, colour, weight, height) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    "INSERT INTO Pet (id_owner, name, species, breed, colour, weight, height, birth_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
   private final String GET_ALL_QUERY =
     "SELECT * FROM Pet";
   private final String GET_ONE_QUERY =
     "SELECT * FROM Pet WHERE id_pet = ? AND id_owner = ?";
   private final String UPDATE_QUERY =
-    "UPDATE Pet SET name = ?, species = ?, breed = ?, colour = ?, weight = ?, height = ? WHERE id_pet = ? AND id_owner = ?";
+    "UPDATE Pet SET name = ?, species = ?, breed = ?, colour = ?, weight = ?, height = ?, birth_date = ? WHERE id_pet = ? AND id_owner = ?";
   private final String DELETE_QUERY =
     "DELETE FROM Pet WHERE id_pet = ? AND id_owner = ?";
 
   @Override
   protected PetDTO createDTOInstanceFromResultSet(ResultSet resultSet) throws SQLException {
     return new PetDTO.PetBuilder()
-      .setID(resultSet.getString("id"))
+      .setID(resultSet.getString("id_pet"))
       .setIDOwner(resultSet.getString("id_owner"))
       .setName(resultSet.getString("name"))
       .setSpecies(resultSet.getString("species"))
@@ -33,6 +34,7 @@ public class PetDAO extends DAOPattern<PetDTO, PetFilter> {
       .setColour(resultSet.getString("colour"))
       .setWeight(resultSet.getFloat("weight"))
       .setHeight(resultSet.getFloat("height"))
+      .setBirthDate(resultSet.getTimestamp("birth_date").toLocalDateTime())
       .build();
   }
 
@@ -49,6 +51,7 @@ public class PetDAO extends DAOPattern<PetDTO, PetFilter> {
       statement.setString(5, dataObject.getColour());
       statement.setFloat(6, dataObject.getWeight());
       statement.setFloat(7, dataObject.getHeight());
+      statement.setTimestamp(8, java.sql.Timestamp.valueOf(dataObject.getBirthDate()));
       statement.executeUpdate();
     }
   }
@@ -100,8 +103,9 @@ public class PetDAO extends DAOPattern<PetDTO, PetFilter> {
       statement.setString(4, dataObject.getColour());
       statement.setFloat(5, dataObject.getWeight());
       statement.setFloat(6, dataObject.getHeight());
-      statement.setString(7, dataObject.getID());
-      statement.setString(8, dataObject.getIDOwner());
+      statement.setTimestamp(7, Timestamp.valueOf(dataObject.getBirthDate()));
+      statement.setString(8, dataObject.getID());
+      statement.setString(9, dataObject.getIDOwner());
       statement.executeUpdate();
     }
   }
