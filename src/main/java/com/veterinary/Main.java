@@ -9,10 +9,6 @@ import java.io.IOException;
 
 public class Main {
   public static class App extends Application {
-    public App() {
-      System.out.println("MAIN: Creating Application...");
-    }
-
     @Override
     public void start(Stage stage) throws IOException {
       FXMLLoader loader = new FXMLLoader(Main.class.getResource("LandingAdministratorPage.fxml"));
@@ -20,11 +16,6 @@ public class Main {
       stage.setTitle("Sistema Gestor de Veterinaria");
       stage.setScene(scene);
       stage.show();
-    }
-
-    @Override
-    public void init() {
-      System.out.println("INIT: Initializing Application...");
     }
   }
 
