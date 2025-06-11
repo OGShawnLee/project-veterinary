@@ -13,7 +13,6 @@ import java.sql.SQLException;
 
 public class RegisterSicknessController extends Controller {
   private static final SicknessDAO SICKNESS_DAO = new SicknessDAO();
-
   @FXML
   private TextField fieldName;
   @FXML
@@ -28,12 +27,12 @@ public class RegisterSicknessController extends Controller {
     loadComboBoxDangerLevel(fieldDangerLevel);
   }
 
-  private static void loadComboBoxSpecies(ComboBox<SicknessDTO.Species> fieldSpecies) {
+  public static void loadComboBoxSpecies(ComboBox<SicknessDTO.Species> fieldSpecies) {
     fieldSpecies.getItems().addAll(SicknessDTO.Species.values());
     fieldSpecies.setValue(SicknessDTO.Species.DOG);
   }
 
-  private static void loadComboBoxDangerLevel(ComboBox<SicknessDTO.DangerLevel> fieldDangerLevel) {
+  public static void loadComboBoxDangerLevel(ComboBox<SicknessDTO.DangerLevel> fieldDangerLevel) {
     fieldDangerLevel.getItems().addAll(SicknessDTO.DangerLevel.values());
     fieldDangerLevel.setValue(SicknessDTO.DangerLevel.LOW);
   }
