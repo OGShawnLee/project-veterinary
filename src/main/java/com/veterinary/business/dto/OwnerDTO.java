@@ -14,6 +14,11 @@ public class OwnerDTO extends Person {
     return email;
   }
 
+  @Override
+  public String toString() {
+    return getFullName() + " (" + email + ")";
+  }
+
   public static class OwnerBuilder extends PersonBuilder<OwnerBuilder> {
     private String email;
 

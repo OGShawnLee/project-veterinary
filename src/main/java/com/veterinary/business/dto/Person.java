@@ -31,6 +31,10 @@ public abstract class Person {
     return maternalLastName;
   }
 
+  public String getFullName() {
+    return String.format("%s %s %s", name, paternalLastName, maternalLastName);
+  }
+
   public String getStreet() {
     return street;
   }
