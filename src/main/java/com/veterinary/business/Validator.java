@@ -4,6 +4,7 @@ public class Validator {
   private static final String EMAIL_REGEX = "^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
   private static final String NAME_REGEX_SPANISH = "^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\\s]+$";
   private static final String FLEXIBLE_NAME_REGEX = "^[A-Za-zÑñÁáÉéÍíÓóÚúÜü0-9\\s\\-_/.:]+$";
+  private static final String PHONE_NUMBER_REGEX = "^[0-9]$";
 
   private static boolean isValidEmail(String email) {
     return isValidString(email) && email.trim().matches(EMAIL_REGEX);
@@ -45,6 +46,14 @@ public class Validator {
     }
 
     throw new IllegalArgumentException("Rol académico debe ser uno de los siguientes: Evaluador, Evaluador-Profesor, Profesor.");
+  }
+
+  public static String getValidPhoneNumber(String value) throws IllegalArgumentException {
+    if (isValidString(value) && value.trim().matches(PHONE_NUMBER_REGEX)) {
+      return value.trim();
+    }
+
+    throw new IllegalArgumentException("Número de teléfono debe ser una cadena de texto con el formato correcto.");
   }
 
   public static String getValidProductSpecies(String value) {
