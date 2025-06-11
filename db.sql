@@ -25,22 +25,23 @@ CREATE TABLE Phone
 CREATE TABLE Account
 (
     email              VARCHAR(128) PRIMARY KEY,
-    display_name       VARCHAR(32)                                       NOT NULL,
-    encrypted_password VARCHAR(64)                                       NOT NULL,
-    role               ENUM ('ADMINISTRATOR', 'SECRETARY', 'VETERINARY') NOT NULL,
+    display_name       VARCHAR(32)                                                        NOT NULL,
+    encrypted_password VARCHAR(64)                                                        NOT NULL,
+    role               ENUM ('ADMINISTRATOR', 'SECRETARY', 'VETERINARY', 'STOCK_MANAGER') NOT NULL,
     FOREIGN KEY (email) REFERENCES Owner (email) ON DELETE CASCADE
 );
 
 CREATE TABLE Staff
 (
     display_name       VARCHAR(32) PRIMARY KEY,
-    name               VARCHAR(32)  NOT NULL,
-    paternal_last_name VARCHAR(32)  NOT NULL,
-    maternal_last_name VARCHAR(32)  NOT NULL,
-    street             VARCHAR(128) NOT NULL,
-    colony             VARCHAR(128) NOT NULL,
-    number             INT          NOT NULL,
-    phone_number       VARCHAR(16)  NOT NULL
+    name               VARCHAR(32)                                       NOT NULL,
+    paternal_last_name VARCHAR(32)                                       NOT NULL,
+    maternal_last_name VARCHAR(32)                                       NOT NULL,
+    street             VARCHAR(128)                                      NOT NULL,
+    colony             VARCHAR(128)                                      NOT NULL,
+    number             INT                                               NOT NULL,
+    phone_number       VARCHAR(16)                                       NOT NULL,
+    role               ENUM ('SECRETARY', 'VETERINARY', 'STOCK_MANAGER') NOT NULL
 );
 
 CREATE TABLE StockManager
@@ -119,7 +120,7 @@ CREATE TABLE Product
     stock       INT                                    NOT NULL,
     species     enum ('DOG', 'CAT', 'BOTH')            NOT NULL,
     price       DECIMAL(10, 2)                         NOT NULL,
-    brand       VARCHAR(32)                            NOT NULL,
+    brand       VARCHAR(64)                            NOT NULL,
     is_sold_out BOOLEAN                                NOT NULL DEFAULT FALSE
 );
 
@@ -171,7 +172,8 @@ CREATE PROCEDURE create_staff(
     IN in_colony VARCHAR(32),
     IN in_number INT,
     IN in_phone_number VARCHAR(10),
-    IN in_encrypted_password VARCHAR(64)
+    IN in_encrypted_password VARCHAR(64),
+    IN in_role ENUM ('SECRETARY', 'VETERINARY', 'STOCK_MANAGER')
 )
 BEGIN
     START TRANSACTION;
@@ -179,7 +181,7 @@ BEGIN
     VALUES (in_email,
             in_display_name,
             in_encrypted_password,
-            'SECRETARY');
+            in_role);
     INSERT INTO Staff (display_name, name, paternal_last_name, maternal_last_name, street, colony, number, phone_number)
     VALUES (in_display_name,
             in_name,
@@ -219,7 +221,8 @@ BEGIN
             in_colony,
             in_number,
             in_phone_number,
-            in_encrypted_password
+            in_encrypted_password,
+            'VETERINARY'
          );
     INSERT INTO Veterinarian (display_name, professional_license, emergency_phone_number)
     VALUES (in_display_name,
@@ -254,7 +257,8 @@ BEGIN
             in_colony,
             in_number,
             in_phone_number,
-            in_encrypted_password
+            in_encrypted_password,
+            'STOCK_MANAGER'
          );
     INSERT INTO StockManager (display_name, id_voter)
     VALUES (in_display_name, in_id_voter);
@@ -287,10 +291,13 @@ BEGIN
             in_colony,
             in_number,
             in_phone_number,
-            in_encrypted_password
+            in_encrypted_password,
+            'SECRETARY'
          );
     INSERT INTO Secretary (display_name, id_voter)
     VALUES (in_display_name, in_id_voter);
     COMMIT;
 END;
 
+SELECT *
+FROM Product;
