@@ -44,7 +44,7 @@ public class LandingAdministratorController extends Controller {
   }
 
   public void navigateToReviewSicknessListPage() {
-    Modal.displayInformation("La funcionalidad de revisar la lista de enfermedades no está disponible aún.");
+    navigateFromThisPageTo("Consultar Enfermedades", "ReviewSicknessListPage");
   }
 
   public void navigateToReviewSaleListPage() {

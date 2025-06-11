@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0"
+            prefWidth="1280.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.veterinary.gui.controller.review.ReviewSicknessListController">
+  <content>
+    <AnchorPane fx:id="container" minHeight="-Infinity" prefHeight="720.0" prefWidth="1280.0">
+      <VBox layoutX="172.0" prefHeight="720.0" prefWidth="950.0" spacing="16.0">
+        <children>
+          <Label text="Lista de Enfermedades" styleClass="title"/>
+          <HBox alignment="CENTER_LEFT" spacing="32.0" prefHeight="32.0">
+            <HBox alignment="CENTER" spacing="16.0">
+              <Button mnemonicParsing="false" onMouseClicked="#navigateToLandingPage" text="Volver a Inicio"
+                      styleClass="button"/>
+              <Button mnemonicParsing="false" onMouseClicked="#handleOpenRegister"
+                      text="Registrar Enfermedad" styleClass="button"/>
+              <Button mnemonicParsing="false" onMouseClicked="#handleManage"
+                      text="Editar Enfermedad" styleClass="button"/>
+            </HBox>
+          </HBox>
+          <TableView fx:id="tableSickness" prefHeight="605.0" prefWidth="1013.0">
+            <columns>
+              <TableColumn fx:id="columnID" prefWidth="50.0" text="ID" styleClass="column"/>
+              <TableColumn fx:id="columnName" prefWidth="170.0" text="Nombre" styleClass="column"/>
+              <TableColumn fx:id="columnDescription" prefWidth="300.0" text="Descripción" styleClass="column"/>
+              <TableColumn fx:id="columnSpecies" prefWidth="140.0" text="Especie" styleClass="column"/>
+              <TableColumn fx:id="columnDangerLevel" prefWidth="140.0" text="Nivel de Peligro" styleClass="column"/>
+            </columns>
+          </TableView>
+        </children>
+        <padding>
+          <Insets bottom="32.0" top="32.0"/>
+        </padding>
+      </VBox>
+    </AnchorPane>
+  </content>
+</ScrollPane>

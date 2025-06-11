@@ -7,6 +7,8 @@ import javafx.scene.control.Alert;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import com.veterinary.gui.controller.manage.ManageController;
+
 import java.io.IOException;
 import java.util.Objects;
 
@@ -35,6 +37,33 @@ public class Modal {
     } catch (IOException e) {
       e.printStackTrace();
       Modal.displayError("No ha sido posible cargar modal.");
+    }
+  }
+
+  public static <T> void displayManageModal(String title, String resourceFileName, Runnable onClose, T dataObject) {
+    try {
+      FXMLLoader loader = new FXMLLoader(
+        Objects.requireNonNull(Modal.class.getResource("/com/veterinary/" + resourceFileName + ".fxml"))
+      );
+
+      Parent root = loader.load();
+      Scene newScene = new Scene(root);
+      Stage modalStage = new Stage();
+
+      if (onClose != null) {
+        modalStage.setOnHidden(event -> onClose.run());
+      }
+
+      ManageController<T> controller = loader.getController();
+      controller.initialize(dataObject);
+
+      modalStage.setTitle(title);
+      modalStage.setScene(newScene);
+      modalStage.setResizable(false);
+      modalStage.initModality(Modality.APPLICATION_MODAL);
+      modalStage.showAndWait();
+    } catch (IOException e) {
+      displayError("No ha sido posible cargar el modal de gestión.");
     }
   }
 
