@@ -22,15 +22,6 @@ CREATE TABLE Phone
     FOREIGN KEY (id_owner) REFERENCES Owner (email) ON DELETE CASCADE
 );
 
-CREATE TABLE Account
-(
-    email              VARCHAR(128) PRIMARY KEY,
-    display_name       VARCHAR(32)                                                        NOT NULL,
-    encrypted_password VARCHAR(64)                                                        NOT NULL,
-    role               ENUM ('ADMINISTRATOR', 'SECRETARY', 'VETERINARY', 'STOCK_MANAGER') NOT NULL,
-    FOREIGN KEY (email) REFERENCES Owner (email) ON DELETE CASCADE
-);
-
 CREATE TABLE Staff
 (
     display_name       VARCHAR(32) PRIMARY KEY,
@@ -42,6 +33,15 @@ CREATE TABLE Staff
     number             INT                                               NOT NULL,
     phone_number       VARCHAR(16)                                       NOT NULL,
     role               ENUM ('SECRETARY', 'VETERINARY', 'STOCK_MANAGER') NOT NULL
+);
+
+CREATE TABLE Account
+(
+    email              VARCHAR(128) PRIMARY KEY,
+    display_name       VARCHAR(32)                                                        NOT NULL,
+    encrypted_password VARCHAR(64)                                                        NOT NULL,
+    role               ENUM ('ADMINISTRATOR', 'SECRETARY', 'VETERINARY', 'STOCK_MANAGER') NOT NULL,
+    FOREIGN KEY (display_name) REFERENCES Staff (display_name) ON DELETE CASCADE
 );
 
 CREATE TABLE StockManager
@@ -159,6 +159,32 @@ CREATE TABLE Diagnosis
 # CREATE USER vet_user@localhost IDENTIFIED BY 'v3Ter1n4#$*';
 GRANT ALL ON Veterinary.* TO vet_user@localhost;
 
+/* Creación de Disparadores */
+
+DROP TRIGGER IF EXISTS update_account_role;
+CREATE TRIGGER update_account_role
+    AFTER UPDATE
+    ON Staff
+    FOR EACH ROW
+BEGIN
+    IF OLD.role <> NEW.role THEN
+        UPDATE Account
+        SET role = NEW.role
+        WHERE display_name = NEW.display_name;
+    END IF;
+END;
+
+DROP TRIGGER IF EXISTS delete_account_on_delete_staff;
+CREATE TRIGGER delete_account_on_delete_staff
+    BEFORE DELETE
+    ON Staff
+    FOR EACH ROW
+BEGIN
+    DELETE
+    FROM Account
+    WHERE display_name = OLD.display_name;
+END;
+
 /* Creación de Procedimientos */
 
 DROP PROCEDURE IF EXISTS create_staff;
@@ -177,12 +203,8 @@ CREATE PROCEDURE create_staff(
 )
 BEGIN
     START TRANSACTION;
-    INSERT INTO Account (email, display_name, encrypted_password, role)
-    VALUES (in_email,
-            in_display_name,
-            in_encrypted_password,
-            in_role);
-    INSERT INTO Staff (display_name, name, paternal_last_name, maternal_last_name, street, colony, number, phone_number)
+    INSERT INTO Staff (display_name, name, paternal_last_name, maternal_last_name, street, colony, number, phone_number,
+                       role)
     VALUES (in_display_name,
             in_name,
             in_paternal_last_name,
@@ -190,7 +212,13 @@ BEGIN
             in_street,
             in_colony,
             in_number,
-            in_phone_number);
+            in_phone_number,
+            in_role);
+    INSERT INTO Account (email, display_name, encrypted_password, role)
+    VALUES (in_email,
+            in_display_name,
+            in_encrypted_password,
+            in_role);
     COMMIT;
 END;
 
@@ -298,6 +326,3 @@ BEGIN
     VALUES (in_display_name, in_id_voter);
     COMMIT;
 END;
-
-SELECT *
-FROM Product;

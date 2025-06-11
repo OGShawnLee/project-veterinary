@@ -4,7 +4,8 @@ public class Validator {
   private static final String EMAIL_REGEX = "^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
   private static final String NAME_REGEX_SPANISH = "^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\\s]+$";
   private static final String FLEXIBLE_NAME_REGEX = "^[A-Za-zÑñÁáÉéÍíÓóÚúÜü0-9\\s\\-_/.:]+$";
-  private static final String PHONE_NUMBER_REGEX = "^[0-9]$";
+  private static final String PHONE_NUMBER_REGEX = "^[0-9]{10,16}$";
+  private static final String DISPLAY_NAME_REGEX = "^[A-Za-z0-9\\-_.]{3,32}$";
 
   private static boolean isValidEmail(String email) {
     return isValidString(email) && email.trim().matches(EMAIL_REGEX);
@@ -25,6 +26,14 @@ public class Validator {
 
     String trimmedString = value.trim();
     return trimmedString.length() >= minLength && trimmedString.length() <= maxLength;
+  }
+
+  public static String getValidDisplayName(String value) throws IllegalArgumentException {
+    if (isValidString(value) && value.trim().matches(DISPLAY_NAME_REGEX)) {
+      return value.trim();
+    }
+
+    throw new IllegalArgumentException("Nombre de usuario debe ser una cadena de texto con el formato correcto.");
   }
 
   public static String getValidPhoneNumber(String value) throws IllegalArgumentException {
@@ -73,8 +82,8 @@ public class Validator {
     );
   }
 
-  private static String getValidString(String value, String name) throws IllegalArgumentException {
-    if (isValidString(value, 3, 128)) {
+  public static String getValidString(String value, String name, int minLength, int maxLength) throws IllegalArgumentException {
+    if (isValidString(value, minLength, maxLength)) {
       return value.trim();
     }
 

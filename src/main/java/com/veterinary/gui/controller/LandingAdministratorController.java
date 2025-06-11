@@ -52,7 +52,7 @@ public class LandingAdministratorController extends Controller {
   }
 
   public void handleOpenRegisterEmployee() {
-    Modal.displayInformation("La funcionalidad de registrar empleados no está disponible aún.");
+    Modal.display("Registrar Empleado", "RegisterStaffModal");
   }
 
   public void handleOpenRegisterAppointment() {
