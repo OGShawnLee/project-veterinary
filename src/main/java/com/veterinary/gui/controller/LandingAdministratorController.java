@@ -40,7 +40,7 @@ public class LandingAdministratorController extends Controller {
   }
 
   public void navigateToReviewProductListPage() {
-    Modal.displayInformation("La funcionalidad de revisar la lista de productos no está disponible aún.");
+    navigateFromThisPageTo("Consultar Productos", "ReviewProductListPage");
   }
 
   public void navigateToReviewSicknessListPage() {
