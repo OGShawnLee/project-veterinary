@@ -81,12 +81,12 @@ public abstract class Person {
     }
 
     public T setStreet(String street) throws IllegalArgumentException {
-      this.street = Validator.getValidFlexibleName(street, "Calle", 3, 32);
+      this.street = Validator.getValidFlexibleName(street, "Calle", 3, 128);
       return self();
     }
 
     public T setColony(String colony) throws IllegalArgumentException {
-      this.colony = Validator.getValidFlexibleName(colony, "Colonia", 3, 32);
+      this.colony = Validator.getValidFlexibleName(colony, "Colonia", 3, 128);
       return self();
     }
 
