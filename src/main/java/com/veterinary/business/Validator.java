@@ -27,59 +27,12 @@ public class Validator {
     return trimmedString.length() >= minLength && trimmedString.length() <= maxLength;
   }
 
-  public static String getValidPetSpecies(String value) throws IllegalArgumentException   {
-    String finalValue = getValidString(value, "Especie");
-
-    if (
-        finalValue.equals("Dog") ||
-        finalValue.equals("Cat")
-    ) {
-      return finalValue;
-    }
-
-    if (finalValue.equals("Perro")) {
-      return "Dog";
-    }
-
-    if (finalValue.equals("Gato")) {
-      return "Cat";
-    }
-
-    throw new IllegalArgumentException("Rol académico debe ser uno de los siguientes: Evaluador, Evaluador-Profesor, Profesor.");
-  }
-
   public static String getValidPhoneNumber(String value) throws IllegalArgumentException {
     if (isValidString(value) && value.trim().matches(PHONE_NUMBER_REGEX)) {
       return value.trim();
     }
 
     throw new IllegalArgumentException("Número de teléfono debe ser una cadena de texto con el formato correcto.");
-  }
-
-  public static String getValidProductSpecies(String value) {
-    String finalValue = getValidString(value, "Especie");
-
-    if (
-        finalValue.equals("Dog") ||
-        finalValue.equals("Cat") ||
-        finalValue.equals("Both")
-    ) {
-      return finalValue;
-    }
-
-    if (finalValue.equals("Perro")) {
-      return "Dog";
-    }
-
-    if (finalValue.equals("Gato")) {
-      return "Cat";
-    }
-
-    if (finalValue.equals("Ambos")) {
-      return "Both";
-    }
-
-    throw new IllegalArgumentException("Rol académico debe ser uno de los siguientes: Evaluador, Evaluador-Profesor, Profesor.");
   }
 
   public static String getValidEmail(String value) throws IllegalArgumentException {
@@ -96,32 +49,6 @@ public class Validator {
     }
 
     throw new IllegalArgumentException(name + " no puede ser nulo o vacío.");
-  }
-
-  public static String getValidKind(String value) {
-    String finalValue = getValidString(value, "Tipo");
-
-    if (
-        finalValue.equals("Accessory") ||
-        finalValue.equals("Food") ||
-        finalValue.equals("Medicine")
-    ) {
-      return finalValue;
-    }
-
-    if (finalValue.equals("Accesorio")) {
-      return "Accessory";
-    }
-
-    if (finalValue.equals("Comida")) {
-      return "Food";
-    }
-
-    if (finalValue.equals("Medicamento")) {
-      return "Medicine";
-    }
-
-    throw new IllegalArgumentException("Rol académico debe ser uno de los siguientes: Evaluador, Evaluador-Profesor, Profesor.");
   }
 
   public static int getValidPositiveInteger(String value) throws IllegalArgumentException {

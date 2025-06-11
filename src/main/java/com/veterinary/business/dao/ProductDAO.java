@@ -1,5 +1,6 @@
 package com.veterinary.business.dao;
 
+import com.veterinary.business.dto.BothSpecies;
 import com.veterinary.business.dto.ProductDTO;
 
 import java.sql.Connection;
@@ -20,10 +21,11 @@ public class ProductDAO extends DAOPattern<ProductDTO, Integer> {
       .setID(resultSet.getInt("id_product"))
       .setName(resultSet.getString("name"))
       .setDescription(resultSet.getString("description"))
-      .setKind(resultSet.getString("kind"))
+      .setKind(ProductDTO.Kind.valueOf(resultSet.getString("kind")))
       .setStock(resultSet.getString("stock"))
-      .setSpecies(resultSet.getString("species"))
+      .setSpecies(BothSpecies.valueOf(resultSet.getString("species")))
       .setPrice(resultSet.getFloat("price"))
+      .setBrand(resultSet.getString("brand"))
       .build();
   }
 
@@ -52,7 +54,6 @@ public class ProductDAO extends DAOPattern<ProductDTO, Integer> {
 
         connection.commit();
       } catch (SQLException e) {
-        System.out.println("Error during transaction: " + e.getMessage());
         connection.rollback();
       }
     }
@@ -66,9 +67,9 @@ public class ProductDAO extends DAOPattern<ProductDTO, Integer> {
     ) {
       statement.setString(1, dataObject.getName());
       statement.setString(2, dataObject.getDescription());
-      statement.setString(3, dataObject.getKind());
+      statement.setString(3, dataObject.getKind().toString());
       statement.setInt(4, dataObject.getStock());
-      statement.setString(5, dataObject.getSpecies());
+      statement.setString(5, dataObject.getSpecies().toString());
       statement.setFloat(6, dataObject.getPrice());
       statement.setString(7, dataObject.getBrand());
       statement.executeUpdate();
@@ -93,18 +94,52 @@ public class ProductDAO extends DAOPattern<ProductDTO, Integer> {
   }
 
   @Override
-  public ProductDTO getOne(Integer filter) throws SQLException {
-    // Implementation for retrieving a single product by ID from the database
+  public ProductDTO getOne(Integer id) throws SQLException {
+    String query = "SELECT * FROM Product WHERE id_product = ?";
+    try (
+      Connection connection = getConnection();
+      PreparedStatement statement = connection.prepareStatement(query)
+    ) {
+      statement.setInt(1, id);
+
+      try (ResultSet resultSet = statement.executeQuery()) {
+        if (resultSet.next()) {
+          return createDTOInstanceFromResultSet(resultSet);
+        }
+      }
+    }
+
     return null;
   }
 
   @Override
   public void updateOne(ProductDTO dataObject) throws SQLException {
-    // Implementation for updating a product in the database
+    String query = "UPDATE Product SET name = ?, description = ?, kind = ?, stock = ?, species = ?, price = ?, brand = ? WHERE id_product = ?";
+    try (
+      Connection connection = getConnection();
+      PreparedStatement statement = connection.prepareStatement(query)
+    ) {
+      statement.setString(1, dataObject.getName());
+      statement.setString(2, dataObject.getDescription());
+      statement.setString(3, dataObject.getKind().toString());
+      statement.setInt(4, dataObject.getStock());
+      statement.setString(5, dataObject.getSpecies().toString());
+      statement.setFloat(6, dataObject.getPrice());
+      statement.setString(7, dataObject.getBrand());
+      statement.setInt(8, dataObject.getID());
+      statement.executeUpdate();
+    }
   }
 
   @Override
-  public void deleteOne(Integer filter) throws SQLException {
-    // Implementation for deleting a product from the database
+  public void deleteOne(Integer id) throws SQLException {
+    String query = "DELETE FROM Product WHERE id_product = ?";
+    try (
+      Connection connection = getConnection();
+      PreparedStatement statement = connection.prepareStatement(query)
+    ) {
+      statement.setInt(1, id);
+      statement.executeUpdate();
+    }
   }
 }

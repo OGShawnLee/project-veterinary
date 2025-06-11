@@ -3,14 +3,18 @@ package com.veterinary.business.dto;
 import com.veterinary.business.Validator;
 
 public class ProductDTO {
-  private int id;
-  private String name;
-  private String description;
-  private String kind;
-  private int stock;
-  private String species;
-  private float price;
-  private String brand;
+  public enum Kind {
+    FOOD, MEDICINE, ACCESSORY
+  }
+
+  private final int id;
+  private final String name;
+  private final String description;
+  private final Kind kind;
+  private final int stock;
+  private final BothSpecies species;
+  private final float price;
+  private final String brand;
 
   public ProductDTO(ProductBuilder builder) {
     this.id = builder.id;
@@ -35,7 +39,7 @@ public class ProductDTO {
     return description;
   }
 
-  public String getKind() {
+  public Kind getKind() {
     return kind;
   }
 
@@ -43,7 +47,7 @@ public class ProductDTO {
     return stock;
   }
 
-  public String getSpecies() {
+  public BothSpecies getSpecies() {
     return species;
   }
 
@@ -59,9 +63,9 @@ public class ProductDTO {
     private int id;
     private String name;
     private String description;
-    private String kind;
+    private Kind kind;
     private int stock;
-    private String species;
+    private BothSpecies species;
     private float price;
     private String brand;
 
@@ -80,8 +84,8 @@ public class ProductDTO {
       return this;
     }
 
-    public ProductBuilder setKind(String kind) {
-      this.kind = Validator.getValidKind(kind);
+    public ProductBuilder setKind(Kind kind) {
+      this.kind = kind;
       return this;
     }
 
@@ -90,8 +94,8 @@ public class ProductDTO {
       return this;
     }
 
-    public ProductBuilder setSpecies(String species) {
-      this.species = Validator.getValidProductSpecies(species);
+    public ProductBuilder setSpecies(BothSpecies species) {
+      this.species = species;
       return this;
     }
 

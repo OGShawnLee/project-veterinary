@@ -1,9 +1,11 @@
 package com.veterinary.gui.controller.register;
 
 import com.veterinary.business.dao.ProductDAO;
+import com.veterinary.business.dto.BothSpecies;
 import com.veterinary.business.dto.ProductDTO;
 import com.veterinary.gui.Modal;
 import com.veterinary.gui.controller.Controller;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -18,19 +20,29 @@ public class RegisterProductController extends Controller {
   @FXML
   private TextField fieldDescription;
   @FXML
-  private ComboBox<String> fieldKind;
+  private ComboBox<ProductDTO.Kind> fieldKind;
   @FXML
   private TextField fieldStock;
   @FXML
-  private ComboBox<String> fieldSpecies;
+  private ComboBox<BothSpecies> fieldSpecies;
   @FXML
   private TextField fieldPrice;
   @FXML
   private TextField fieldBrand;
 
   public void initialize() {
-    fieldKind.getItems().addAll("Accesorio", "Comida", "Medicamento");
-    fieldSpecies.getItems().addAll("Gato", "Perro", "Ambos");
+    loadComboBoxKind(fieldKind);
+    loadComboBoxSpecies(fieldSpecies);
+  }
+
+  public static void loadComboBoxSpecies(ComboBox<BothSpecies> comboBox) {
+    comboBox.getItems().addAll(BothSpecies.values());
+    comboBox.setValue(BothSpecies.BOTH);
+  }
+
+  public static void loadComboBoxKind(ComboBox<ProductDTO.Kind> comboBox) {
+    comboBox.getItems().addAll(ProductDTO.Kind.values());
+    comboBox.setValue(ProductDTO.Kind.MEDICINE);
   }
 
   public void handleRegisterProduct() {
