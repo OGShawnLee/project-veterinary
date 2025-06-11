@@ -3,10 +3,7 @@ package com.veterinary.business.dao;
 import com.veterinary.business.dto.BothSpecies;
 import com.veterinary.business.dto.ProductDTO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +11,7 @@ public class ProductDAO extends DAOPattern<ProductDTO, Integer> {
   private final String CREATE_QUERY =
     "INSERT INTO Product (name, description, kind, stock, species, price, brand) VALUES (?, ?, ?, ?, ?, ?, ?)";
   private final String GET_ALL_QUERY = "SELECT * FROM Product";
+  private final String HANDLE_BUY_PRODUCT = "call buy_product(?, ?, ?)";
 
   @Override
   ProductDTO createDTOInstanceFromResultSet(ResultSet resultSet) throws SQLException {
@@ -29,33 +27,15 @@ public class ProductDAO extends DAOPattern<ProductDTO, Integer> {
       .build();
   }
 
-  public void buyProduct(ProductDTO dataObject, String emailOwner, int quantity) throws SQLException {
+  public void buyProduct(int idProduct, String idOwner, int quantity) throws SQLException {
     try (
       Connection connection = getConnection();
+      CallableStatement statement = connection.prepareCall(HANDLE_BUY_PRODUCT)
     ) {
-      connection.setAutoCommit(false);
-
-      try (
-        PreparedStatement reduceStockStatement = connection.prepareStatement(
-          "UPDATE Product SET stock = stock - ? WHERE id_product = ?"
-        );
-        PreparedStatement createSaleStatement = connection.prepareStatement(
-          "INSERT INTO Sale (id_product, id_owner, quantity) VALUES (?, ?, ?)"
-        )
-      ) {
-        reduceStockStatement.setInt(1, quantity);
-        reduceStockStatement.setInt(2, dataObject.getID());
-        reduceStockStatement.executeUpdate();
-
-        createSaleStatement.setInt(1, dataObject.getID());
-        createSaleStatement.setString(2, emailOwner);
-        createSaleStatement.setInt(3, quantity);
-        createSaleStatement.executeUpdate();
-
-        connection.commit();
-      } catch (SQLException e) {
-        connection.rollback();
-      }
+      statement.setInt(1, idProduct);
+      statement.setString(2, idOwner);
+      statement.setInt(3, quantity);
+      statement.execute();
     }
   }
 

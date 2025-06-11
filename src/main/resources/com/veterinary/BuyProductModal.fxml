@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="960.0" prefWidth="720.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.veterinary.gui.controller.BuyProductController">
+  <children>
+    <VBox layoutX="200.0" layoutY="87.0" prefWidth="320.0" spacing="16.0">
+      <children>
+        <Label styleClass="title" text="Comprar Producto">
+          <VBox.margin>
+            <Insets />
+          </VBox.margin>
+          <padding>
+            <Insets bottom="8.0" />
+          </padding>
+        </Label>
+        <VBox spacing="8.0">
+          <children>
+            <Label styleClass="label" text="ID del Producto" />
+            <TextField fx:id="fieldID" disable="true" editable="false" promptText="ID del Producto" styleClass="input" />
+          </children>
+        </VBox>
+        <VBox spacing="8.0">
+          <children>
+            <Label styleClass="label" text="Nombre" />
+            <TextField fx:id="fieldName" disable="true" editable="false" promptText="Nombre del Producto" styleClass="input" />
+          </children>
+        </VBox>
+        <VBox spacing="8.0">
+          <children>
+            <Label styleClass="label" text="Descripción" />
+            <TextField fx:id="fieldDescription" disable="true" editable="false" promptText="Descripción del Producto" styleClass="input" />
+          </children>
+        </VBox>
+        <VBox spacing="8.0">
+          <children>
+            <Label styleClass="label" text="Tipo" />
+            <TextField fx:id="fieldKind" disable="true" editable="false" promptText="Tipo del Producto" styleClass="input" />
+          </children>
+        </VBox>
+        <VBox spacing="8.0">
+          <children>
+            <Label styleClass="label" text="Inventario" />
+            <TextField fx:id="fieldStock" disable="true" editable="false" promptText="Inventario Disponible" styleClass="input" />
+          </children>
+        </VBox>
+        <VBox spacing="8.0">
+          <children>
+            <Label styleClass="label" text="Especie" />
+            <TextField fx:id="fieldSpecies" disable="true" editable="false" promptText="Especie del Producto" styleClass="input" />
+          </children>
+        </VBox>
+        <VBox spacing="8.0">
+          <children>
+            <Label styleClass="label" text="Precio" />
+            <TextField fx:id="fieldPrice" disable="true" editable="false" promptText="Precio del Producto" styleClass="input" />
+          </children>
+        </VBox>
+        <VBox spacing="8.0">
+          <children>
+            <Label styleClass="label" text="Marca" />
+            <TextField fx:id="fieldBrand" disable="true" editable="false" promptText="Marca del Producto" styleClass="input" />
+          </children>
+        </VBox>
+        <VBox spacing="8.0">
+          <children>
+            <Label styleClass="label" text="Cliente" />
+            <ComboBox fx:id="comboBoxOwner" maxWidth="1.7976931348623157E308" promptText="Seleccione el Cliente" styleClass="input" />
+          </children>
+        </VBox>
+        <VBox spacing="8.0">
+          <children>
+            <Label styleClass="label" text="Cantidad" />
+            <TextField fx:id="fieldBuyQuantity" promptText="Cantidad a Comprar" styleClass="input" />
+          </children>
+        </VBox>
+        <HBox>
+          <children>
+            <Button mnemonicParsing="false" onAction="#handleUpdate" prefWidth="320.0" styleClass="button" text="Comprar Producto" />
+          </children>
+        </HBox>
+      </children>
+    </VBox>
+  </children>
+</AnchorPane>

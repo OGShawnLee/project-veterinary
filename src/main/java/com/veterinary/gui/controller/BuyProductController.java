@@ -1,111 +1,93 @@
 package com.veterinary.gui.controller;
 
-import com.veterinary.business.Validator;
-import com.veterinary.business.dao.OwnerDAO;
 import com.veterinary.business.dao.ProductDAO;
+import com.veterinary.business.dao.OwnerDAO;
 import com.veterinary.business.dto.OwnerDTO;
 import com.veterinary.business.dto.ProductDTO;
 import com.veterinary.gui.Modal;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.veterinary.gui.controller.manage.ManageController;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
 import java.sql.SQLException;
-import java.util.List;
 
-public class BuyProductController extends Controller {
+public class BuyProductController extends ManageController<ProductDTO> {
   private static final ProductDAO PRODUCT_DAO = new ProductDAO();
   private static final OwnerDAO OWNER_DAO = new OwnerDAO();
-  @FXML
-  private TableView<ProductDTO> tableProduct;
-  @FXML
-  private TableColumn<ProductDTO, Integer> columnID;
-  @FXML
-  private TableColumn<ProductDTO, String> columnName;
-  @FXML
-  private TableColumn<ProductDTO, String> columnDescription;
-  @FXML
-  private TableColumn<ProductDTO, String> columnKind;
-  @FXML
-  private TableColumn<ProductDTO, Integer> columnStock;
-  @FXML
-  private TableColumn<ProductDTO, String> columnSpecies;
-  @FXML
-  private TableColumn<ProductDTO, Float> columnPrice;
-  @FXML
-  private TableColumn<ProductDTO, String> columnBrand;
-  @FXML
-  private TextField fieldQuantity;
-  @FXML
-  private TextField fieldEmail;
-  private ProductDTO selectedProduct;
 
-  public void initialize() {
-    configureProductTable();
-    loadProductList();
-    tableProduct.setOnMouseClicked(event -> {
-      if (event.getClickCount() == 2) {
-        selectedProduct = tableProduct.getSelectionModel().getSelectedItem();
-      }
-    });
+  @FXML
+  private TextField fieldID;
+  @FXML
+  private TextField fieldName;
+  @FXML
+  private TextField fieldDescription;
+  @FXML
+  private TextField fieldKind;
+  @FXML
+  private TextField fieldStock;
+  @FXML
+  private TextField fieldSpecies;
+  @FXML
+  private TextField fieldPrice;
+  @FXML
+  private TextField fieldBrand;
+  @FXML
+  private ComboBox<OwnerDTO> comboBoxOwner;
+  @FXML
+  private TextField fieldBuyQuantity;
+
+  @Override
+  public void initialize(ProductDTO currentProduct) {
+    super.initialize(currentProduct);
+    loadComboBoxOwners();
+    loadDataObjectFields();
   }
 
-  private void configureProductTable() {
-    columnID.setCellValueFactory(new PropertyValueFactory<>("ID"));
-    columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-    columnDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-    columnKind.setCellValueFactory(new PropertyValueFactory<>("kind"));
-    columnStock.setCellValueFactory(new PropertyValueFactory<>("stock"));
-    columnSpecies.setCellValueFactory(new PropertyValueFactory<>("species"));
-    columnPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-    columnBrand.setCellValueFactory(new PropertyValueFactory<>("brand"));
-  }
-
-  private void loadProductList() {
+  private void loadComboBoxOwners() {
     try {
-      List<ProductDTO> productList = PRODUCT_DAO.getAll();
-      ObservableList<ProductDTO> observableListProduct = FXCollections.observableArrayList(productList);
-      tableProduct.setItems(observableListProduct);
+      comboBoxOwner.getItems().setAll(OWNER_DAO.getAll());
+
+      if (comboBoxOwner.getItems().isEmpty()) {
+        Modal.displayError("No hay clientes registrados. Por favor, registre un cliente antes de comprar un producto.");
+        return;
+      }
+
+      comboBoxOwner.setValue(comboBoxOwner.getItems().get(0));
     } catch (SQLException e) {
-      Modal.displayError(
-        "No ha sido posible cargar la lista de productos debido a un error de sistema." + e.getMessage()
+      Modal.displayError("No se pudieron cargar los clientes.");
+    }
+  }
+
+  public void loadDataObjectFields() {
+    fieldID.setText(String.valueOf(getCurrentDataObject().getID()));
+    fieldName.setText(getCurrentDataObject().getName());
+    fieldDescription.setText(getCurrentDataObject().getDescription());
+    fieldKind.setText(getCurrentDataObject().getKind().toString());
+    fieldStock.setText(String.valueOf(getCurrentDataObject().getStock()));
+    fieldSpecies.setText(getCurrentDataObject().getSpecies().toString());
+    fieldPrice.setText(String.valueOf(getCurrentDataObject().getPrice()));
+    fieldBrand.setText(getCurrentDataObject().getBrand());
+  }
+
+  public void handleUpdate() {
+    try {
+      OwnerDTO selectedClient = comboBoxOwner.getValue();
+      if (selectedClient == null) {
+        Modal.displayError("Debe seleccionar un cliente.");
+        return;
+      }
+
+      PRODUCT_DAO.buyProduct(
+        getCurrentDataObject().getID(),
+        selectedClient.getEmail(),
+        Integer.parseInt(fieldBuyQuantity.getText())
       );
-    }
-  }
 
-
-  public void handleBuyProduct() {
-    if (selectedProduct == null) {
-      Modal.displayError("Por favor selecciona un producto al hacer doble click sobre una fila.");
-      return;
-    }
-
-    try {
-      int quantity = Validator.getValidPositiveInteger(fieldQuantity.getText());
-      String email = Validator.getValidEmail(fieldEmail.getText());
-
-      OwnerDTO dataObjectOwner = OWNER_DAO.getOne(email);
-
-      if (dataObjectOwner == null) {
-        throw new IllegalArgumentException("El dueño no existe.");
-      }
-
-      PRODUCT_DAO.buyProduct(selectedProduct, email, quantity);
-      loadProductList();
-      Modal.displaySuccess("Producto comprado con éxito.");
-    } catch (IllegalArgumentException e) {
-      Modal.displayError(e.getMessage());
+      Modal.displaySuccess("El producto ha sido comprado exitosamente.");
     } catch (SQLException e) {
-      Modal.displayError("No ha sido posible comprar el producto debido a un error en la base de datos." + e.getMessage());
+      Modal.displayError("No se pudo completar la compra debido a un error en el sistema.");
     }
-  }
-
-  public static void navigateToBuyProductPage(Stage currentStage) {
-    navigateTo(currentStage, "Comprar Producto", "BuyProductPage");
   }
 }

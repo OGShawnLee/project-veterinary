@@ -34,9 +34,6 @@ public class ManageProductController extends ManageController<ProductDTO> {
   @Override
   public void initialize(ProductDTO currentProduct) {
     super.initialize(currentProduct);
-
-System.out.println(currentProduct.getBrand());
-
     RegisterProductController.loadComboBoxSpecies(comboBoxSpecies);
     RegisterProductController.loadComboBoxSpecies(comboBoxSpecies);
     loadDataObjectFields();

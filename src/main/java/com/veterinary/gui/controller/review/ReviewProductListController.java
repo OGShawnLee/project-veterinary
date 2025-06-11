@@ -33,7 +33,6 @@ public class ReviewProductListController extends ReviewListController {
   @FXML
   private TableColumn<ProductDTO, String> columnBrand;
 
-
   @Override
   public void initialize() {
     loadTableColumns();
@@ -83,6 +82,19 @@ public class ReviewProductListController extends ReviewListController {
     Modal.displayManageModal(
       "Gestionar Producto",
       "ManageProductModal",
+      this::loadDataList,
+      selectedProduct
+    );
+  }
+
+  public void handleBuyProduct() {
+    ProductDTO selectedProduct = tableProduct.getSelectionModel().getSelectedItem();
+
+    if (selectedProduct == null) return;
+
+    Modal.displayManageModal(
+      "Comprar Producto",
+      "BuyProductModal",
       this::loadDataList,
       selectedProduct
     );

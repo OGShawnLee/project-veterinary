@@ -27,6 +27,8 @@
                       styleClass="button"/>
               <Button mnemonicParsing="false" onMouseClicked="#handleManage" text="Editar Producto"
                       styleClass="button"/>
+              <Button mnemonicParsing="false" onMouseClicked="#handleBuyProduct" text="Comprar Producto"
+                      styleClass="button"/>
             </HBox>
           </HBox>
           <TableView fx:id="tableProduct" prefHeight="605.0" prefWidth="1013.0">

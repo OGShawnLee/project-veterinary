@@ -326,3 +326,28 @@ BEGIN
     VALUES (in_display_name, in_id_voter);
     COMMIT;
 END;
+
+DROP PROCEDURE IF EXISTS buy_product;
+CREATE PROCEDURE buy_product(
+    IN in_id_product INT,
+    IN in_id_owner VARCHAR(128),
+    IN in_quantity INT
+)
+BEGIN
+    START TRANSACTION;
+    IF (in_quantity <= 0) THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Quantity must be greater than zero.';
+    END IF;
+    IF (SELECT stock FROM Product WHERE id_product = in_id_product) < in_quantity THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Insufficient stock for the product.';
+    END IF;
+    INSERT INTO Sale (id_product, id_owner, quantity)
+    VALUES (in_id_product, in_id_owner, in_quantity);
+    UPDATE Product
+    SET stock       = stock - in_quantity,
+        is_sold_out = (stock - in_quantity <= 0)
+    WHERE id_product = in_id_product;
+    COMMIT;
+END;
