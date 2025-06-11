@@ -2,7 +2,7 @@ package com.veterinary.business.dto;
 
 import com.veterinary.business.Validator;
 
-public class StaffDTO extends Person{
+public class StaffDTO extends Person {
   public enum Role {
     SECRETARY, VETERINARY, STOCK_MANAGER
   }
@@ -24,6 +24,10 @@ public class StaffDTO extends Person{
 
   public String getPhoneNumber() {
     return phoneNumber;
+  }
+
+  public Role getRole() {
+    return role;
   }
 
   public static class StaffBuilder extends Person.PersonBuilder<StaffBuilder> {

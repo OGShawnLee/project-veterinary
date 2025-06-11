@@ -24,7 +24,7 @@ public class LandingAdministratorController extends Controller {
   }
 
   public void navigateToReviewEmployeeListPage() {
-    Modal.displayInformation("La funcionalidad de revisar la lista de empleados no está disponible aún.");
+    Modal.display("Consultar Empleados", "ReviewStaffListPage");
   }
 
   public void navigateToReviewPetListPage() {
