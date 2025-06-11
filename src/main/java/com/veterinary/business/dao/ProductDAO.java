@@ -30,7 +30,7 @@ public class ProductDAO extends DAOPattern<ProductDTO, Integer> {
 
   public void buyProduct(ProductDTO dataObject, String emailOwner, int quantity) throws SQLException {
     try (
-      Connection connection = DBConnector.getConnection();
+      Connection connection = getConnection();
     ) {
       connection.setAutoCommit(false);
 
@@ -62,7 +62,7 @@ public class ProductDAO extends DAOPattern<ProductDTO, Integer> {
   @Override
   public void createOne(ProductDTO dataObject) throws SQLException {
     try (
-      Connection connection = DBConnector.getConnection();
+      Connection connection = getConnection();
       PreparedStatement statement = connection.prepareStatement(CREATE_QUERY)
     ) {
       statement.setString(1, dataObject.getName());
@@ -79,7 +79,7 @@ public class ProductDAO extends DAOPattern<ProductDTO, Integer> {
   @Override
   public List<ProductDTO> getAll() throws SQLException {
     try (
-      Connection connection = DBConnector.getConnection();
+      Connection connection = getConnection();
       PreparedStatement statement = connection.prepareStatement(GET_ALL_QUERY);
       ResultSet resultSet = statement.executeQuery()
     ) {

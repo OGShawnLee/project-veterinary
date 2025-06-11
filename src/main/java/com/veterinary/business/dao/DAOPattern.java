@@ -1,11 +1,18 @@
 package com.veterinary.business.dao;
 
+import com.veterinary.db.DBConnector;
+
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 public abstract class DAOPattern<T, F> {
-  protected abstract T createDTOInstanceFromResultSet(ResultSet resultSet) throws SQLException;
+  protected Connection getConnection() throws SQLException {
+    return DBConnector.getConnection();
+  }
+
+  abstract T createDTOInstanceFromResultSet(ResultSet resultSet) throws SQLException;
 
   public abstract void createOne(T dataObject) throws SQLException;
 
