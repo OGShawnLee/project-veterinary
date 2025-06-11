@@ -88,12 +88,8 @@
                   prefWidth="160.0" styleClass="button" text="Registrar Enfermedad"/>
         </HBox>
         <!-- Sale -->
-        <HBox maxWidth="-Infinity" prefHeight="32.0" spacing="16.0">
-          <Button onAction="#navigateToReviewSaleListPage" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
-                  prefWidth="160.0" styleClass="button" text="Compras"/>
-          <Button onAction="#handleOpenRegisterSale" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
-                  prefWidth="160.0" styleClass="button" text="Registrar Compra"/>
-        </HBox>
+        <Button onAction="#navigateToReviewSaleListPage" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                prefWidth="320.0" styleClass="button" text="Compras"/>
       </children>
     </VBox>
   </children>

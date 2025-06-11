@@ -31,7 +31,7 @@
           </HBox>
           <TableView fx:id="tablePet" prefHeight="605.0" prefWidth="1013.0">
             <columns>
-              <TableColumn fx:id="columnID" prefWidth="50.0" text="ID" styleClass="column"/>
+              <TableColumn fx:id="columnID" prefWidth="50" text="ID" styleClass="column"/>
               <TableColumn fx:id="columnIDOwner" prefWidth="200.0" text="ID Propietario" styleClass="column"/>
               <TableColumn fx:id="columnName" prefWidth="170.0" text="Nombre" styleClass="column"/>
               <TableColumn fx:id="columnSpecies" prefWidth="140.0" text="Especie" styleClass="column"/>

@@ -48,7 +48,7 @@ public class LandingAdministratorController extends Controller {
   }
 
   public void navigateToReviewSaleListPage() {
-    Modal.displayInformation("La funcionalidad de revisar la lista de compras no está disponible aún.");
+    navigateFromThisPageTo("Consultar Ventas", "ReviewSaleListPage");
   }
 
   public void handleOpenRegisterEmployee() {
@@ -65,9 +65,5 @@ public class LandingAdministratorController extends Controller {
 
   public void handleOpenRegisterSickness() {
     Modal.display("Registrar Enfermedad", "RegisterSicknessModal");
-  }
-
-  public void handleOpenRegisterSale() {
-    Modal.displayInformation("La funcionalidad de registrar compras no está disponible aún.");
   }
 }
