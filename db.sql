@@ -4,14 +4,15 @@ USE Veterinary;
 
 /* Creación de la Estructura de la Base de Datos */
 
-CREATE TABLE Owner (
-  email VARCHAR(128) PRIMARY KEY,
-  name VARCHAR(32) NOT NULL,
-  paternal_last_name VARCHAR(32) NOT NULL,
-  maternal_last_name VARCHAR(32) NOT NULL,
-  street VARCHAR(32) NOT NULL,
-  colony VARCHAR(32) NOT NULL,
-  number INT NOT NULL
+CREATE TABLE Owner
+(
+    email              VARCHAR(128) PRIMARY KEY,
+    name               VARCHAR(32)  NOT NULL,
+    paternal_last_name VARCHAR(32)  NOT NULL,
+    maternal_last_name VARCHAR(32)  NOT NULL,
+    street             VARCHAR(128) NOT NULL,
+    colony             VARCHAR(128) NOT NULL,
+    number             INT          NOT NULL
 );
 
 CREATE TABLE Phone (
