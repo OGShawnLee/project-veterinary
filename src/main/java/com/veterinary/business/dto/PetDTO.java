@@ -5,10 +5,12 @@ import com.veterinary.business.Validator;
 import java.time.LocalDateTime;
 
 public class PetDTO {
+  public enum Species { DOG, CAT }
+
   private final String id;
   private final String idOwner;
   private final String name;
-  private final String species;
+  private final Species species;
   private final String breed;
   private final String colour;
   private final float weight;
@@ -39,7 +41,7 @@ public class PetDTO {
     return name;
   }
 
-  public String getSpecies() {
+  public Species getSpecies() {
     return species;
   }
 
@@ -67,7 +69,7 @@ public class PetDTO {
     private String id;
     private String idOwner;
     private String name;
-    private String species;
+    private Species species;
     private String breed;
     private String colour;
     private float weight;
@@ -89,8 +91,8 @@ public class PetDTO {
       return this;
     }
 
-    public PetBuilder setSpecies(String species) throws IllegalArgumentException {
-      this.species = Validator.getValidPetSpecies(species);
+    public PetBuilder setSpecies(Species species) throws IllegalArgumentException {
+      this.species = species;
       return this;
     }
 

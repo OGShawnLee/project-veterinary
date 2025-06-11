@@ -2,7 +2,6 @@ package com.veterinary.business.dao;
 
 import com.veterinary.business.dto.PetDTO;
 import com.veterinary.business.dao.filter.PetFilter;
-import com.veterinary.db.DBConnector;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,7 +29,7 @@ public class PetDAO extends DAOPattern<PetDTO, PetFilter> {
       .setID(resultSet.getString("id_pet"))
       .setIDOwner(resultSet.getString("id_owner"))
       .setName(resultSet.getString("name"))
-      .setSpecies(resultSet.getString("species"))
+      .setSpecies(PetDTO.Species.valueOf(resultSet.getString("species")))
       .setBreed(resultSet.getString("breed"))
       .setColour(resultSet.getString("colour"))
       .setWeight(resultSet.getFloat("weight"))
@@ -47,7 +46,7 @@ public class PetDAO extends DAOPattern<PetDTO, PetFilter> {
     ) {
       statement.setString(1, dataObject.getIDOwner());
       statement.setString(2, dataObject.getName());
-      statement.setString(3, dataObject.getSpecies());
+      statement.setString(3, dataObject.getSpecies().toString());
       statement.setString(4, dataObject.getBreed());
       statement.setString(5, dataObject.getColour());
       statement.setFloat(6, dataObject.getWeight());
@@ -99,7 +98,7 @@ public class PetDAO extends DAOPattern<PetDTO, PetFilter> {
       PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)
     ) {
       statement.setString(1, dataObject.getName());
-      statement.setString(2, dataObject.getSpecies());
+      statement.setString(2, dataObject.getSpecies().toString());
       statement.setString(3, dataObject.getBreed());
       statement.setString(4, dataObject.getColour());
       statement.setFloat(5, dataObject.getWeight());

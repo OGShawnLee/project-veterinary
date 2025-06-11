@@ -1,7 +1,6 @@
 package com.veterinary.business.dao;
 
 import com.veterinary.business.dto.ProductDTO;
-import com.veterinary.db.DBConnector;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,7 +15,7 @@ public class ProductDAO extends DAOPattern<ProductDTO, Integer> {
   private final String GET_ALL_QUERY = "SELECT * FROM Product";
 
   @Override
-  protected ProductDTO createDTOInstanceFromResultSet(ResultSet resultSet) throws SQLException {
+  ProductDTO createDTOInstanceFromResultSet(ResultSet resultSet) throws SQLException {
     return new ProductDTO.ProductBuilder()
       .setID(resultSet.getInt("id_product"))
       .setName(resultSet.getString("name"))
