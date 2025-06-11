@@ -28,7 +28,7 @@ public class LandingAdministratorController extends Controller {
   }
 
   public void navigateToReviewPetListPage() {
-    Modal.displayInformation("La funcionalidad de revisar la lista de mascotas no está disponible aún.");
+    navigateFromThisPageTo("Consultar Mascotas", "ReviewPetListPage");
   }
 
   public void navigateToReviewAppointmentListPage() {
