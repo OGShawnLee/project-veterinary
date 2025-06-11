@@ -64,7 +64,7 @@ public class LandingAdministratorController extends Controller {
   }
 
   public void handleOpenRegisterSickness() {
-    Modal.displayInformation("La funcionalidad de registrar enfermedades no está disponible aún.");
+    Modal.display("Registrar Enfermedad", "RegisterSicknessModal");
   }
 
   public void handleOpenRegisterSale() {
