@@ -20,7 +20,7 @@ public class LandingAdministratorController extends Controller {
   }
 
   public void navigateToReviewOwnerListPage() {
-    Modal.displayInformation("La funcionalidad de revisar la lista de dueños no está disponible aún.");
+    navigateFromThisPageTo("Consultar Dueños", "ReviewOwnerListPage");
   }
 
   public void navigateToReviewEmployeeListPage() {

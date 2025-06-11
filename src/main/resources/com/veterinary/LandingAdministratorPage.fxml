@@ -40,7 +40,7 @@
         <!-- Owner -->
         <HBox maxWidth="-Infinity" prefHeight="32.0" spacing="16.0">
           <Button onAction="#navigateToReviewOwnerListPage" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
-                  prefWidth="160.0" styleClass="button" text="Dueño"/>
+                  prefWidth="160.0" styleClass="button" text="Dueños"/>
           <Button onAction="#handleOpenRegisterOwner" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
                   prefWidth="160.0" styleClass="button" text="Registrar Dueño"/>
         </HBox>
