@@ -7,15 +7,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class App {
-  public static class RealApp extends Application {
-    public RealApp() {
+public class Main {
+  public static class App extends Application {
+    public App() {
       System.out.println("MAIN: Creating Application...");
     }
 
     @Override
     public void start(Stage stage) throws IOException {
-      FXMLLoader loader = new FXMLLoader(App.class.getResource("LandingPage.fxml"));
+      FXMLLoader loader = new FXMLLoader(Main.class.getResource("LandingPage.fxml"));
       Scene scene = new Scene(loader.load());
       stage.setTitle("Veterinaría!");
       stage.setScene(scene);
@@ -29,6 +29,6 @@ public class App {
   }
 
   public static void main(String[] args) {
-    Application.launch(RealApp.class);
+    Application.launch(App.class);
   }
 }
