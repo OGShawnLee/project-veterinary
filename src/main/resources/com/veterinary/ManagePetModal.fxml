@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="720.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.veterinary.gui.controller.manage.ManagePetController">
+  <children>
+    <VBox layoutX="200.0" layoutY="42.0" prefWidth="320.0" spacing="16.0">
+      <children>
+        <Label styleClass="title" text="Gestionar Mascota">
+          <VBox.margin>
+            <Insets />
+          </VBox.margin>
+          <padding>
+            <Insets bottom="8.0" />
+          </padding>
+        </Label>
+        <VBox spacing="8.0">
+          <children>
+            <Label styleClass="label" text="ID de la Mascota" />
+            <TextField fx:id="fieldIDPet" disable="true" editable="false" promptText="ID de la Mascota" styleClass="input" />
+          </children>
+        </VBox>
+        <VBox spacing="8.0">
+          <children>
+            <Label styleClass="label" text="Dueño" />
+            <ComboBox fx:id="comboBoxOwner" maxWidth="1.7976931348623157E308" promptText="Seleccione un Dueño" styleClass="input" />
+          </children>
+        </VBox>
+        <VBox spacing="8.0">
+          <children>
+            <Label styleClass="label" text="Nombre" />
+            <TextField fx:id="fieldName" promptText="Introduzca el Nombre de la Mascota" styleClass="input" />
+          </children>
+        </VBox>
+        <VBox spacing="8.0">
+          <children>
+            <Label styleClass="label" text="Especie" />
+            <ComboBox fx:id="comboBoxSpecies" maxWidth="1.7976931348623157E308" promptText="Seleccione una Especie" styleClass="input" />
+          </children>
+        </VBox>
+        <VBox spacing="8.0">
+          <children>
+            <Label styleClass="label" text="Raza" />
+            <TextField fx:id="fieldBreed" promptText="Introduzca la Raza de la Mascota" styleClass="input" />
+          </children>
+        </VBox>
+        <VBox spacing="8.0">
+          <children>
+            <Label styleClass="label" text="Color" />
+            <TextField fx:id="fieldColour" promptText="Introduzca el Color de la Mascota" styleClass="input" />
+          </children>
+        </VBox>
+        <VBox spacing="8.0">
+          <children>
+            <Label styleClass="label" text="Peso" />
+            <TextField fx:id="fieldWeight" promptText="Introduzca el Peso de la Mascota" styleClass="input" />
+          </children>
+        </VBox>
+        <VBox spacing="8.0">
+          <children>
+            <Label styleClass="label" text="Altura" />
+            <TextField fx:id="fieldHeight" promptText="Introduzca la Altura de la Mascota" styleClass="input" />
+          </children>
+        </VBox>
+        <VBox spacing="8.0">
+          <children>
+            <Label styleClass="label" text="Fecha de Nacimiento" />
+            <DatePicker fx:id="datePickerBirthDate" maxWidth="1.7976931348623157E308" promptText="Seleccione la Fecha de Nacimiento de la Mascota" styleClass="input" />
+          </children>
+        </VBox>
+        <HBox>
+          <children>
+            <Button mnemonicParsing="false" onAction="#handleUpdate" prefWidth="320.0" styleClass="button" text="Actualizar Mascota" />
+          </children>
+        </HBox>
+      </children>
+    </VBox>
+  </children>
+</AnchorPane>
