@@ -15,9 +15,9 @@ public class Main {
 
     @Override
     public void start(Stage stage) throws IOException {
-      FXMLLoader loader = new FXMLLoader(Main.class.getResource("LandingPage.fxml"));
+      FXMLLoader loader = new FXMLLoader(Main.class.getResource("LandingAdministratorPage.fxml"));
       Scene scene = new Scene(loader.load());
-      stage.setTitle("Veterinaría!");
+      stage.setTitle("Sistema Gestor de Veterinaria");
       stage.setScene(scene);
       stage.show();
     }

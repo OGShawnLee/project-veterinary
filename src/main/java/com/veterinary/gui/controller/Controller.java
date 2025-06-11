@@ -20,7 +20,7 @@ public abstract class Controller {
   }
 
   public void navigateToLandingPage() {
-    LandingPageController.navigateToLandingPage(getScene());
+    navigateFromThisPageTo("Página de Inicio", "LandingPage");
   }
 
   protected void navigateFromThisPageTo(String pageName, String resourceFileName) {

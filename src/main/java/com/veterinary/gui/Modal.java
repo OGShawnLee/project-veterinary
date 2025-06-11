@@ -1,8 +1,43 @@
 package com.veterinary.gui;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.Objects;
 
 public class Modal {
+  public static void display(String title, String resourceFileName) {
+    display(title, resourceFileName, null);
+  }
+
+  public static void display(String title, String resourceFileName, Runnable onClose) {
+    try {
+      Parent root = FXMLLoader.load(
+        Objects.requireNonNull(Modal.class.getResource("/com/veterinary/" + resourceFileName + ".fxml"))
+      );
+      Scene newScene = new Scene(root);
+      Stage modalStage = new Stage();
+
+      if (onClose != null) {
+        modalStage.setOnHidden(event -> onClose.run());
+      }
+
+      modalStage.setTitle(title);
+      modalStage.setScene(newScene);
+      modalStage.setResizable(false);
+      modalStage.initModality(Modality.APPLICATION_MODAL);
+      modalStage.showAndWait();
+    } catch (IOException e) {
+      e.printStackTrace();
+      Modal.displayError("No ha sido posible cargar modal.");
+    }
+  }
+
   public static void displayError(String message) {
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setTitle("Error");
@@ -10,6 +45,15 @@ public class Modal {
     alert.setContentText(message);
     alert.showAndWait();
   }
+
+  public static void displayInformation(String message) {
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle("Información");
+    alert.setHeaderText("Información del Sistema");
+    alert.setContentText(message);
+    alert.showAndWait();
+  }
+
 
   public static void displaySuccess(String message) {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);

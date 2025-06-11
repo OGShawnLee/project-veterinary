@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="720.0" prefWidth="1280.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.veterinary.gui.controller.LandingAdministratorController">
+  <children>
+    <!-- User Info and Logout -->
+    <VBox layoutY="604.0" prefWidth="320.0" spacing="16.0">
+      <children>
+        <Label fx:id="labelEmail" styleClass="title" text="\@Correo Electrónico">
+          <VBox.margin>
+            <Insets/>
+          </VBox.margin>
+          <padding>
+            <Insets bottom="8.0"/>
+          </padding>
+        </Label>
+        <HBox>
+          <children>
+            <Button mnemonicParsing="false" onAction="#handleLogOut" prefWidth="320.0" styleClass="button"
+                    text="Cerrar Sesión"/>
+          </children>
+        </HBox>
+      </children>
+      <padding>
+        <Insets bottom="32.0" left="32.0"/>
+      </padding>
+    </VBox>
+    <!-- Main Actions -->
+    <VBox layoutX="480.0" layoutY="200.0" prefWidth="320.0" spacing="16.0">
+      <children>
+        <!-- Owner -->
+        <HBox maxWidth="-Infinity" prefHeight="32.0" spacing="16.0">
+          <Button onAction="#navigateToReviewOwnerListPage" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                  prefWidth="160.0" styleClass="button" text="Dueño"/>
+          <Button onAction="#handleOpenRegisterOwner" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                  prefWidth="160.0" styleClass="button" text="Registrar Dueño"/>
+        </HBox>
+        <!-- Employees -->
+        <HBox maxWidth="-Infinity" prefHeight="32.0" spacing="16.0">
+          <Button onAction="#navigateToReviewEmployeeListPage" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                  prefWidth="160.0" styleClass="button" text="Empleados"/>
+          <Button onAction="#handleOpenRegisterEmployee" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                  prefWidth="160.0" styleClass="button" text="Registrar Empleado"/>
+        </HBox>
+        <!-- Pet -->
+        <HBox maxWidth="-Infinity" prefHeight="32.0" spacing="16.0">
+          <Button onAction="#navigateToReviewPetListPage" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                  prefWidth="160.0" styleClass="button" text="Mascotas"/>
+          <Button onAction="#handleOpenRegisterPet" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                  prefWidth="160.0" styleClass="button" text="Registrar Mascota"/>
+        </HBox>
+        <!-- Appointment -->
+        <HBox maxWidth="-Infinity" prefHeight="32.0" spacing="16.0">
+          <Button onAction="#navigateToReviewAppointmentListPage" maxWidth="1.7976931348623157E308"
+                  mnemonicParsing="false"
+                  prefWidth="160.0" styleClass="button" text="Citas"/>
+          <Button onAction="#handleOpenRegisterAppointment" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                  prefWidth="160.0" styleClass="button" text="Registrar Cita"/>
+        </HBox>
+        <!-- Diagnosis -->
+        <HBox maxWidth="-Infinity" prefHeight="32.0" spacing="16.0">
+          <Button onAction="#navigateToReviewDiagnosisListPage" maxWidth="1.7976931348623157E308"
+                  mnemonicParsing="false"
+                  prefWidth="160.0" styleClass="button" text="Diagnósticos"/>
+          <Button onAction="#handleOpenRegisterDiagnosis" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                  prefWidth="160.0" styleClass="button" text="Registrar Diagnóstico"/>
+        </HBox>
+        <HBox maxWidth="-Infinity" prefHeight="32.0" spacing="16.0">
+          <Button onAction="#navigateToReviewProductListPage" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                  prefWidth="160.0" styleClass="button" text="Productos"/>
+          <Button onAction="#handleOpenRegisterProduct" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                  prefWidth="160.0" styleClass="button" text="Registrar Producto"/>
+        </HBox>
+        <!-- Sickness -->
+        <HBox maxWidth="-Infinity" prefHeight="32.0" spacing="16.0">
+          <Button onAction="#navigateToReviewSicknessListPage" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                  prefWidth="160.0" styleClass="button" text="Enfermedades"/>
+          <Button onAction="#handleOpenRegisterSickness" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                  prefWidth="160.0" styleClass="button" text="Registrar Enfermedad"/>
+        </HBox>
+        <!-- Sale -->
+        <HBox maxWidth="-Infinity" prefHeight="32.0" spacing="16.0">
+          <Button onAction="#navigateToReviewSaleListPage" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                  prefWidth="160.0" styleClass="button" text="Compras"/>
+          <Button onAction="#handleOpenRegisterSale" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                  prefWidth="160.0" styleClass="button" text="Registrar Compra"/>
+        </HBox>
+      </children>
+    </VBox>
+  </children>
+</AnchorPane>
