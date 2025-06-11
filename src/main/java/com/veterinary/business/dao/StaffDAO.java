@@ -19,7 +19,7 @@ public class StaffDAO extends DAOPattern<StaffDTO, String> {
     "SELECT * FROM Staff WHERE display_name = ?";
   private static final String UPDATE_QUERY =
     "UPDATE Staff SET name = ?, paternal_last_name = ?, maternal_last_name = ?, " +
-    "street = ?, colony = ?, number = ?, phone_number = ? WHERE display_name = ?";
+    "street = ?, colony = ?, number = ?, phone_number = ?, role = ? WHERE display_name = ?";
   private static final String DELETE_QUERY =
     "DELETE FROM Staff WHERE display_name = ?";
 
@@ -107,7 +107,8 @@ public class StaffDAO extends DAOPattern<StaffDTO, String> {
       statement.setString(5, dataObject.getColony());
       statement.setInt(6, dataObject.getNumber());
       statement.setString(7, dataObject.getPhoneNumber());
-      statement.setString(8, dataObject.getDisplayName());
+      statement.setString(8, dataObject.getRole().toString());
+      statement.setString(9, dataObject.getDisplayName());
       statement.executeUpdate();
     }
   }
